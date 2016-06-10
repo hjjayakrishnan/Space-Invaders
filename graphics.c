@@ -122,8 +122,8 @@ void Display_all(unsigned char count,double x_player){
 	// Add Playership to screen buffer
 	if(PlayerShip.life){
 		Nokia5110_PrintBMP(PlayerShip.posx,PlayerShip.posy, PlayerShip.image, 0);
-		Nokia5110_DisplayBuffer();	
-	}
+		}
+	Nokia5110_DisplayBuffer();
 }	
 
 void Move_Missile(unsigned char *count){
@@ -180,7 +180,7 @@ void EnemyReSpawn(){
 			if(!EnemyRow[i].life){
 				EnemyRow[i].life=1;
 				EnemyRow[i].image=SmallEnemy10PointB;
-				EnemyRow[i].posx=i*SMALL_ENEMY_ROW_GAP;
+				EnemyRow[i].posx=i*SMALL_ENEMY_ROW_GAP+3;
 				EnemyRow[i].posy=ENEMY_VERTICAL_GAP;
 			}				
 		}
