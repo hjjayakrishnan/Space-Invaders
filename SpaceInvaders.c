@@ -68,7 +68,7 @@ unsigned char *EnemyExplosion;
 unsigned char temp =2;
 unsigned char PlayerReSpawnClockCycle=0;
 #define SCREEN_FACTOR (84-(PLAYERW))/4096
-//0.020268
+
 
 
 int main(void){
@@ -84,42 +84,14 @@ int main(void){
 	Timer2_Init(0x1312d00);
 	Random_Init(21);
 	
-	
-	
-	
-
-//  Nokia5110_PrintBMP(32, 47, PlayerShip0, 0); // player ship middle bottom
-//  Nokia5110_PrintBMP(33, 47 - PLAYERH, Bunker0, 0);
-
-//  Nokia5110_PrintBMP(0, ENEMY10H - 1, SmallEnemy10PointA, 0);
-//  Nokia5110_PrintBMP(16, ENEMY10H - 1, SmallEnemy20PointA, 0);
-//  Nokia5110_PrintBMP(32, ENEMY10H - 1, SmallEnemy20PointA, 0);
-//  Nokia5110_PrintBMP(48, ENEMY10H - 1, SmallEnemy30PointA, 0);
-//  Nokia5110_PrintBMP(64, ENEMY10H - 1, SmallEnemy30PointA, 0);
-//  Nokia5110_DisplayBuffer();     // draw buffer
-
-//  Delay100ms(1);              // delay 5 sec at 50 MHz
-
-
-//  Nokia5110_Clear();
-//  Nokia5110_SetCursor(1, 1);
-//  Nokia5110_OutString("GAME OVER");
-//  Nokia5110_SetCursor(1, 2);
-//  Nokia5110_OutString("Nice try,");
-//  Nokia5110_SetCursor(1, 3);
-//  Nokia5110_OutString("Earthling!");
-//  Nokia5110_SetCursor(2, 4);
-//  Nokia5110_OutUDec(1234);
-
   while(1){	
 		
 		if (Semaphore==1){
+			// Display Player and sprites
 			Display_all(Player_Missile_Count, PlayerShip_Xpos);
 			// Collision Display
-			DisplayCollision(PlayerExplosion, PlayerShip_Xpos, EnemyExplosion);
-			
-			Semaphore=0;
-			
+			DisplayCollision(PlayerExplosion, PlayerShip_Xpos, EnemyExplosion);			
+			Semaphore=0;			
 		}		
   }
 }
@@ -145,27 +117,29 @@ void Timer2_Init(unsigned long period){
   NVIC_EN0_R = 1<<23;           // 9) enable IRQ 23 in NVIC
   TIMER2_CTL_R = 0x00000001;    // 10) enable timer2A
 }
+
+
+//	ISR for Timer2
+//	Initiates periodically :
+//	1. Generation of Enemy missiles
+//	2. Enemy Horde movement towards player
+//	3. Enemy Respawn after being killed
 void Timer2A_Handler(void){ 
   TIMER2_ICR_R = 0x00000001;   // acknowledge timer2A timeout
   TimerCount++;
-	GPIO_PORTE_DATA_R ^= 0x10;
- // Semaphore = 1; // trigger
+	GPIO_PORTE_DATA_R ^= 0x10;	//For debugging
 
-
-Generate_Enemey_Missile();
-MoveDirection ^= 1; // Induce zig zag horizontal motion
-EnemyHordeMove(MoveDirection);
-EnemyReSpawn();
-PlayerReSpawnClockCycle++; 
+//**** Here starts periodic game functions ****//
+	Generate_Enemey_Missile();
+	MoveDirection ^= 1; // Induce zig zag horizontal motion
+	EnemyHordeMove(MoveDirection);
+	EnemyReSpawn();
+	PlayerReSpawnClockCycle++; 
 	// We wait for 2 clock cycles before Playership respawns
-if(PlayerReSpawnClockCycle>2){
-	PlayerReSpawn(PlayerShip_Xpos);
-	PlayerReSpawnClockCycle=0;
-}
-	
-	
-	
-	
+	if(PlayerReSpawnClockCycle>2){
+		PlayerReSpawn(PlayerShip_Xpos);
+		PlayerReSpawnClockCycle=0;
+	}	
 }
 
 
@@ -177,18 +151,25 @@ void SysTick_Init(void){
 	//NVIC_SYS_PRI3_R = NVIC_SYS_PRI3_R&0x00FFFFFF; // priority 0   
   NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & ~0xE0000000) | 0x20000000;	
   NVIC_ST_CTRL_R = 0x00000007;  // enable with core clock and interrupts
-	
-
 }
-// executes every 25 ms, collects a sample, converts and stores in mailbox
+
+
+
+//	ISR for SysTick
+//	Execution every 25ms
+//	Initiates periodically:
+//	1. Collection of Analog I/P from slider, 
+//	conversion and storage in mailbox
+//	2. Detection of Switch Press Event
+//	3.	Collision detection
 void SysTick_Handler(void){ 
 	  Slider_x = ADC0_In();
     ADC_flag=1;
 	  //GPIO_PORTE_DATA_R ^= 0x10;
-		if((GPIO_PORTE_DATA_R&0x01) == 0x01)
-			Switch0Flag = 1;
+		
 		
 		// scale the player ship position w.r.t slide pot input
+	
 		PlayerShip_Xpos = Slider_x * SCREEN_FACTOR;		
 		if(SwitchPressEvent()){
 			Player_Missile_Count++;

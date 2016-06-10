@@ -250,8 +250,7 @@ static	unsigned char Player_Missile_Count=0;
 
 
 
-//void moveSprite (void);
-//void display(void);
+
 void Generate_Player_Missile(double x,double y,unsigned char count);
 void Display_all(unsigned char count, double player_x);
 void Move_Missile(unsigned char *count);
