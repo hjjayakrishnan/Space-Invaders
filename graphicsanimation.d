@@ -1,0 +1,1 @@
+.\graphicsanimation.o: GraphicsAnimation.c
