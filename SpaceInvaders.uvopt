@@ -317,7 +317,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>270</TopLine>
+      <TopLine>271</TopLine>
       <CurrentLine>277</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\startup.s</PathWithFileName>
@@ -333,7 +333,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>349</TopLine>
+      <TopLine>4</TopLine>
       <CurrentLine>5</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Nokia5110.c</PathWithFileName>
@@ -363,10 +363,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>27</ColumnNumber>
+      <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>185</TopLine>
-      <CurrentLine>191</CurrentLine>
+      <TopLine>164</TopLine>
+      <CurrentLine>97</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\SpaceInvaders.c</PathWithFileName>
       <FilenameWithoutPath>SpaceInvaders.c</FilenameWithoutPath>
@@ -381,7 +381,7 @@
       <Focus>0</Focus>
       <ColumnNumber>55</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>73</TopLine>
+      <TopLine>88</TopLine>
       <CurrentLine>97</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\TExaS.c</PathWithFileName>
@@ -411,10 +411,10 @@
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>24</ColumnNumber>
+      <ColumnNumber>46</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>242</TopLine>
-      <CurrentLine>262</CurrentLine>
+      <TopLine>236</TopLine>
+      <CurrentLine>260</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\graphics.h</PathWithFileName>
       <FilenameWithoutPath>graphics.h</FilenameWithoutPath>
@@ -429,7 +429,7 @@
       <Focus>0</Focus>
       <ColumnNumber>18</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>37</TopLine>
+      <TopLine>9</TopLine>
       <CurrentLine>10</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\ADC.c</PathWithFileName>
